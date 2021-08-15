@@ -1,0 +1,122 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:3924374811676368858",
+      "lastPropertyId": "19:7626206806497854266",
+      "name": "BaseUser",
+      "properties": [
+        {
+          "id": "1:4879794631209592364",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:6256402984831678012",
+          "name": "personId",
+          "type": 9
+        },
+        {
+          "id": "3:289865490313420405",
+          "name": "externalId",
+          "type": 9
+        },
+        {
+          "id": "4:1289954835016190627",
+          "name": "gender",
+          "type": 9
+        },
+        {
+          "id": "5:8650061175221509196",
+          "name": "age",
+          "type": 5
+        },
+        {
+          "id": "6:7809819025895342225",
+          "name": "cardNumber",
+          "type": 9
+        },
+        {
+          "id": "7:4020483901584834176",
+          "name": "identityNumber",
+          "type": 9
+        },
+        {
+          "id": "8:2072594019713602062",
+          "name": "personName",
+          "type": 9
+        },
+        {
+          "id": "9:976914057176377338",
+          "name": "groupName",
+          "type": 9
+        },
+        {
+          "id": "10:5539983031989044747",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "11:1512495207535265230",
+          "name": "payload",
+          "type": 9
+        },
+        {
+          "id": "12:4693600835878352216",
+          "name": "tagIds",
+          "type": 9
+        },
+        {
+          "id": "13:6915783552579340331",
+          "name": "tags",
+          "type": 9
+        },
+        {
+          "id": "14:9138154241699437169",
+          "name": "imageUrls",
+          "type": 9
+        },
+        {
+          "id": "15:2012777184859517160",
+          "name": "features",
+          "type": 23
+        },
+        {
+          "id": "16:5283525029205610658",
+          "name": "featureExtracted",
+          "type": 1
+        },
+        {
+          "id": "17:6046050285367325115",
+          "name": "visitCount",
+          "type": 6
+        },
+        {
+          "id": "18:4506484323516201154",
+          "name": "syncId",
+          "type": 6
+        },
+        {
+          "id": "19:7626206806497854266",
+          "name": "hasFeatures",
+          "type": 1
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "1:3924374811676368858",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
