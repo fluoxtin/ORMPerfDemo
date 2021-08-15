@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">ORMPrefDemo</string>
+    <string name="object_box">ObjectBox</string>
+    <string name="green_dao">GreenDao</string>
+    <string name="realm">Realm</string>
+    <string name="mmkv">MMKV</string>
+    <string name="tips">Run Times / Number of Entities</string>
+    <string name="_1">1</string>
+    <string name="_100">100</string>
+    <string name="button_start">start</string>
 </resources>
