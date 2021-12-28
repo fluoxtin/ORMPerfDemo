@@ -1,17 +1,23 @@
 package com.example.ormprefdemo.greendao;
 
+import android.util.Log;
+
 import com.example.ormprefdemo.PerfTest;
 import com.example.ormprefdemo.greendao.db.BaseUser;
 import com.example.ormprefdemo.greendao.db.BaseUserDao;
 import com.example.ormprefdemo.greendao.db.DaoSession;
+
 import org.greenrobot.greendao.query.Query;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GreenDaoTest extends PerfTest {
+    private static final String TAG = "GreenDao";
 
-//    BaseUser mUser;
+    public GreenDaoTest(int executeTimes, int numberEntities, OnSetLog callback) {
+        super(executeTimes, numberEntities, callback);
+    }
 
     protected String name() {
         return "GreenDao";
@@ -26,23 +32,19 @@ public class GreenDaoTest extends PerfTest {
         baseUserDao.deleteAll();
 
         for (int i = 0; i < EXECUTE_TIMES; i++) {
-            start("Insert");
+            start("Insert All");
             // 因为我这里循环了，所以数据库中已经有的数据不能再插入，然后就报错了。
             baseUserDao.insertInTx(users);
             end();
             baseUserDao.deleteAll();
         }
 
-
-
-//        for (int i = 0; i < EXECUTE_TIMES; i++) {
-//            start("Insert One");
-//            for (BaseUser user : users) {
-//                baseUserDao.insertInTx(user);
-//            }
-//            end();
-//            baseUserDao.deleteAll();
-//        }
+        for (int i = 0; i < EXECUTE_TIMES; i++) {
+            start("Delete All");
+            baseUserDao.deleteAll();
+            end();
+            baseUserDao.deleteAll();
+        }
 
         baseUserDao.insertInTx(users);
 
@@ -50,13 +52,15 @@ public class GreenDaoTest extends PerfTest {
         List<BaseUser> list = new ArrayList<>();
 
         for (int i = 0; i < EXECUTE_TIMES; i++) {
-            start("Load  ");
-            baseUserDao.loadAll();
+            start("Query All ");
+            list = baseUserDao.loadAll();
+//            list = baseUserDao.queryBuilder().build().list();
 
 //            list = queryByPersonId(baseUserDao, "%Person_id%").list();
 //            query.list();
 //            users =  query.list();
             end();
+            Log.d(TAG, "list size : " + list.size());
         }
 
         for (int i = 0; i < EXECUTE_TIMES; i++) {

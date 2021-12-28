@@ -6,12 +6,19 @@ import com.example.ormprefdemo.realm.db.BaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
 
 public class RealmTest extends PerfTest {
+
+    private static final String TAG = "realmTest";
+
+    public RealmTest(int executeTimes, int numberEntities, OnSetLog callback) {
+        super(executeTimes, numberEntities, callback);
+    }
 
     protected String name() {
         return "Realm";
@@ -24,7 +31,10 @@ public class RealmTest extends PerfTest {
         delete(realm);
         for (int i = 0; i < EXECUTE_TIMES; i++) {
             start("Insert");
-            insert(realm, list);
+//            insert(realm, list);
+            realm.executeTransactionAsync(
+                    realm1 -> realm1.insert(list)
+            );
             end();
             delete(realm);
         }
@@ -32,9 +42,10 @@ public class RealmTest extends PerfTest {
 
         // 这里相比 ObjectBox 、GreenDao 快的原因是，使用事务，我们只要打开一个事务
         // 在事务不关闭的时候，一个一个的添加数据，和一次添加 n 个数据是差不太多的，
-        // 主要原因我觉得是内部写的有类似于 MMVK 的缓冲区，这样可以避免很多 IO 操作，从而提高速度。
+        // 不关闭事务，可以避免多次开启关闭造成的时间消耗
         for (int i = 0; i < EXECUTE_TIMES; i++) {
             start("Insert one");
+//            realm.executeTransactionAsync(realm1 -> insert(realm1, list));
             insertOne(realm, list);
             end();
             delete(realm);

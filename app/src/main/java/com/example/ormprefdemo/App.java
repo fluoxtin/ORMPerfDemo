@@ -3,6 +3,7 @@ package com.example.ormprefdemo;
 
 import android.app.Application;
 
+import com.dbflow5.config.FlowManager;
 import com.example.ormprefdemo.greendao.DBManager;
 import com.example.ormprefdemo.mmkv.MMKVManager;
 import com.example.ormprefdemo.objectbox.ObjectBox;
@@ -26,6 +27,8 @@ public class App extends Application {
 
         //mmkv initialize
         MMKVManager.init(this);
-//
+
+        // dbflow initialize
+        FlowManager.init(this);
     }
 }

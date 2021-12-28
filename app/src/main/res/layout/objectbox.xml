@@ -48,6 +48,20 @@
             android:textSize="20sp"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/db_flow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dbflow"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

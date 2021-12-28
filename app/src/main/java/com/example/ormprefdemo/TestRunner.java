@@ -1,41 +1,33 @@
 package com.example.ormprefdemo;
 
-import android.app.Activity;
-
-import com.example.ormprefdemo.databinding.ObjectboxBinding;
-
-import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class TestRunner {
 
-    boolean running;
-    int numberEntities;
-    int numberTimes;
-    Activity mActivity;
-    ObjectboxBinding mBinding;
-    List<PerfTest> mPerfTestList;
+    ExecutorService es;
+    static TestRunner testRunner;
 
-    public TestRunner(Activity activity, List<PerfTest> test, int numberTimes, int numberEntities, ObjectboxBinding binding) {
-        mActivity = activity;
-        this.numberTimes = numberTimes;
-        this.numberEntities = numberEntities;
-        mBinding = binding;
-        mPerfTestList = test;
-        run(test);
+    public static TestRunner getInstance() {
+        if (testRunner == null)
+            testRunner = new TestRunner();
+        return testRunner;
     }
 
-    public void run (List<PerfTest> list) {
-        if (running) {
-            throw new RuntimeException("Already running!");
-        }
+    private TestRunner() {
+        es = Executors.newSingleThreadExecutor();
+    }
 
-        running = true;
-        new Thread(() -> {
-            for (PerfTest test : list) {
-                test.init(mActivity, numberTimes, numberEntities, mBinding);
+
+    public synchronized void run (Queue<PerfTest> list) {
+
+        while (list.peek() != null) {
+            PerfTest test = list.poll();
+            es.submit(() -> {
                 test.logName();
                 test.run();
-            }
-         }).start();
+            });
+        }
     }
 }

@@ -12,6 +12,10 @@ public class MMKVTest extends PerfTest {
 
     BaseUser user;
 
+    public MMKVTest(int executeTimes, int numberEntities, OnSetLog callback) {
+        super(executeTimes, numberEntities, callback);
+    }
+
     @Override
     protected String name() {
         return "MMKV";

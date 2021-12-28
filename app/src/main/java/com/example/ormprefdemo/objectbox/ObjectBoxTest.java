@@ -14,6 +14,10 @@ public class ObjectBoxTest extends PerfTest {
 
     BaseUser mUser;
 
+    public ObjectBoxTest(int executeTimes, int numberEntities, OnSetLog callback) {
+        super(executeTimes, numberEntities, callback);
+    }
+
     protected String name() {
         return "ObjectBox";
     }
@@ -26,7 +30,7 @@ public class ObjectBoxTest extends PerfTest {
 
 
         List<BaseUser> users = prepareList();
-
+        baseUserBox.put();
         baseUserBox.removeAll();
         //  insert method contains putting new data & updating old data
         for (int i = 0; i < EXECUTE_TIMES; i++) {

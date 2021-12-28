@@ -1,11 +1,15 @@
 package com.example.ormprefdemo;
 
 import android.os.SystemClock;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.IntSummaryStatistics;
 
 public class TimeMark {
+
+    private static final String TAG = "TimeMark";
+
     private boolean started;
     private long timeMills;
     private String name;
@@ -34,6 +38,7 @@ public class TimeMark {
         times.add((int) time);
 
         logMessage = name + " : " + "\t" + averageTime(times) + " ms";
+        Log.d(TAG, "time: " + time);
 
     }
 

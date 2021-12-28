@@ -2,12 +2,9 @@ package com.example.ormprefdemo.objectbox;
 
 import android.content.Context;
 
-
 import com.example.ormprefdemo.objectbox.db.MyObjectBox;
 
 import io.objectbox.BoxStore;
-import io.objectbox.android.AndroidObjectBrowser;
-import io.objectbox.android.BuildConfig;
 
 public class ObjectBox {
     public static BoxStore mBoxStore;

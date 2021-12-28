@@ -1,21 +1,23 @@
 package com.example.ormprefdemo;
 
-import android.app.Activity;
-
-import com.example.ormprefdemo.databinding.ObjectboxBinding;
-
+import android.os.Handler;
+import android.os.Looper;
 
 public abstract class PerfTest {
 
     protected int EXECUTE_TIMES;
     protected int numberEntities;
-    protected Activity mActivity;
     private final TimeMark mTimeMark;
     private int i = 0;
-    private ObjectboxBinding mBinding;
+    private final Handler handler;
+    private final OnSetLog listener;
 
-    public PerfTest() {
+    public PerfTest(int executeTimes, int numberEntities, OnSetLog callback) {
+        EXECUTE_TIMES = executeTimes;
+        this.numberEntities = numberEntities;
+        listener = callback;
         mTimeMark = new TimeMark();
+        handler = new Handler(Looper.getMainLooper());
     }
 
     protected abstract String name();
@@ -25,14 +27,6 @@ public abstract class PerfTest {
     protected void logName() {
         log("\n" + name());
     }
-
-    protected void init(Activity activity, int executeTimes, int numberEntities, ObjectboxBinding binding) {
-        mActivity = activity;
-        EXECUTE_TIMES = executeTimes;
-        this.numberEntities = numberEntities;
-        mBinding = binding;
-    }
-
 
     protected void start(String name) {
         mTimeMark.start(name);
@@ -49,8 +43,10 @@ public abstract class PerfTest {
     }
 
     protected void log(String s) {
-        mActivity.runOnUiThread(() -> {
-            mBinding.tv.append(s + "\n");
-        });
+        handler.post(() -> listener.setLog(s));
+    }
+
+    public interface OnSetLog {
+        void setLog(String s);
     }
 }
